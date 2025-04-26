@@ -1,8 +1,15 @@
+import React from "react";
+
+
+
 export function FoodTable({ foods }) {
   const filas = [];
   foods.forEach((food) => {
-    filas.push(<FoodCell />);
-  });
+    filas.push(
+    <tr key={food.name}>
+      <FoodCell food={food} />
+    </tr >
+  )});
 
   return (
     <table>
@@ -11,16 +18,16 @@ export function FoodTable({ foods }) {
   );
 }
 
-export function FoodCell() {
+export function FoodCell({ food }) {
   return (
-  <td><FoodImage /></td>
-);
+    <td>
+      <FoodImage food={food}/>
+    </td>
+  );
 }
 
-export function FoodImage({ foods }) {
-    return (
-        <img src={foods.image} alt="" />
-    );
+export function FoodImage({ food }) {
+  <img src={food.image} alt="" />;
 }
 
 export function FoodPrice() {}

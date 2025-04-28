@@ -18,7 +18,7 @@ const FOODS = [
     id: 1,
     name: "Hamburger",
     price: 5.99,
-    image: "src/images/Hamburger.jpeg",
+    image: "src/images/hamburger.png",
     stock: 10,
   },
   {

@@ -1,17 +1,7 @@
-import React from "react";
+import React, { useState} from "react";
 import { FoodImage, FoodTable } from "./components/FoodTable/FoodTable";
 import { TitleHeader } from "./components/TitleHeader";
 import { OrderDetails } from "./components/OrderDetails/OrderDetails";
-
-function App() {
-  return (
-    <>
-      <TitleHeader />
-      <FoodTable foods={FOODS}/>
-      <OrderDetails />
-    </>
-  );
-}
 
 const FOODS = [
   {
@@ -35,6 +25,26 @@ const FOODS = [
     image: "src/images/sushi.png",
     stock: 0,
   },
+
+  {
+    id: 4,
+    name: "Empanadas",
+    price: 4.99,
+    image: "src/images/empanada.png",
+    stock: 30,
+  },
 ];
+
+function App() {
+  const [orders, setOrders] = useState(FOODS.map(({ id }) => ({ id, quantity: 0 })));
+  console.log(orders);
+  return (
+    <>
+      <TitleHeader />
+      <FoodTable foods={FOODS} />
+      <OrderDetails />
+    </>
+  );
+}
 
 export default App;

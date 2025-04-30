@@ -20,16 +20,16 @@ export function FoodTable({ foods }) {
   }
 
   return (
-    <table>
+    <table style={{float: "left"}}>
       <tbody>{filas}</tbody>
     </table>
   );
 }
 
 export function FoodCell({ food }) {
-  const name = food.name;
-  const price = food.price;
-  const stock = food.stock;
+  const {name} = food;
+  const {price} = food;
+  const {stock} = food;
   return (
     <td
       style={{
@@ -44,7 +44,7 @@ export function FoodCell({ food }) {
         verticalAlign: "top",
       }}
     >
-      <FoodImage image={food.image} />
+      <FoodImage food={food} />
       <p
         style={{
           display: "flex",
@@ -74,12 +74,12 @@ export function FoodCell({ food }) {
   );
 }
 
-export function FoodImage({ image }) {
+export function FoodImage({ food }) {
   return (
     <img
-      src={image}
+      src={food.image}
       alt="food Image"
-      style={{ width: "200px", height: "200px" }}
+      style={{ width: "200px", height: "200px", opacity: food.stock === 0 ? 0.5: 1 }}
     />
   );
 }

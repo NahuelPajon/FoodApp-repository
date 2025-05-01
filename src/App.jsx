@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { FoodImage, FoodTable } from "./components/FoodTable/FoodTable";
 import { TitleHeader } from "./components/TitleHeader";
 import { OrderDetails } from "./components/OrderDetails/OrderDetails";
@@ -35,16 +35,49 @@ const FOODS = [
   },
 ];
 
+// TODO: FOODS need to be imported from a JSON file with a fetch request
+
+// TODO: list FOODS needs to be an state variable
+// TODO: add USEFFECT to reflect the changes in the state variable that is obtained from the fetch request
+
 function App() {
-  const [orders, setOrders] = useState(FOODS.map(({ id }) => ({ id, quantity: 0 })));
-  console.log(orders);
+
+  const [orders, setOrders] = useState(
+    FOODS.map(({ id }) => ({ id, quantity: 0 }))
+  );
+
+  const incrementCuenta = (id) => {
+    setOrders((prevOrders) =>
+      prevOrders.map((order) => {
+        if (order.id === id) {
+          if (FOODS.find((food) => food.id === id).stock > 0 && order.quantity < FOODS.find((food) => food.id === id).stock) {
+            // logic to add order if stock
+            return {
+              ...order,
+              quantity: order.quantity + 1,
+            };
+          }
+        }
+        return order;
+      })
+    );
+  };
+
   return (
     <>
       <TitleHeader />
-      <FoodTable foods={FOODS} />
-      <OrderDetails />
+      <FoodTable foods={FOODS} incrementCuenta={incrementCuenta} />
+      <OrderDetails foods={FOODS} orders={orders} incrementCuenta={incrementCuenta}/>
     </>
   );
 }
+
+// function incrementCuenta() {
+//   setOrders((prevOrders) =>
+//     prevOrders.map((order) =>
+//       order.id === id ? { ...order, quantity: order.quantity + 1 } : order
+//     )
+//   );
+// }
 
 export default App;

@@ -1,6 +1,6 @@
 import React from "react";
 
-export function FoodTable({ foods }) {
+export function FoodTable({ foods, incrementCuenta }) {
   if (!foods || foods.length === 0) {
     return <p>No hay alimentos disponibles.</p>;
   }
@@ -10,28 +10,27 @@ export function FoodTable({ foods }) {
 
   for (let i = 0; i < foods.length; i += columnsPerRow) {
     const fila = (
-      <tr key={i}>
+      <div key={i}>
         {foods.slice(i, i + columnsPerRow).map((food) => (
-          <FoodCell key={food.id} food={food} />
+          <FoodCell key={food.id} food={food} incrementCuenta={incrementCuenta} />
         ))}
-      </tr>
+      </div>
     );
     filas.push(fila);
   }
 
   return (
-    <table style={{float: "left"}}>
-      <tbody>{filas}</tbody>
-    </table>
+    <div style={{float: "left"}}>
+      {filas}
+    </div>
   );
 }
 
-export function FoodCell({ food }) {
-  const {name} = food;
-  const {price} = food;
-  const {stock} = food;
+export function FoodCell({ food, incrementCuenta }) {
+  const { name, price, stock, id } = food;
   return (
-    <td
+    <div
+      onClick={() => incrementCuenta(id)}
       style={{
         backgroundColor: "#f9f9f9",
         display: "inline-block",
@@ -43,7 +42,7 @@ export function FoodCell({ food }) {
         textAlign: "center",
         verticalAlign: "top",
       }}
-    >
+      >
       <FoodImage food={food} />
       <p
         style={{
@@ -51,7 +50,7 @@ export function FoodCell({ food }) {
           justifyContent: "center",
           alignItems: "center",
         }}
-      >
+        >
         {name}
       </p>
       <div
@@ -60,19 +59,20 @@ export function FoodCell({ food }) {
           justifyContent: "space-between",
           alignItems: "center",
         }}
-      >
+        >
         <p>Price: ${price}</p>
         <p
           style={{
             color: stock === 0 ? "red" : "green",
           }}
-        >
+          >
           Stock: {stock}
         </p>
       </div>
-    </td>
+    </div>
   );
 }
+          
 
 export function FoodImage({ food }) {
   return (

@@ -25,7 +25,6 @@ const FOODS = [
     image: "src/images/sushi.png",
     stock: 0,
   },
-
   {
     id: 4,
     name: "Empanadas",
@@ -41,7 +40,6 @@ const FOODS = [
 // TODO: add USEFFECT to reflect the changes in the state variable that is obtained from the fetch request
 
 function App() {
-
   const [orders, setOrders] = useState(
     FOODS.map(({ id }) => ({ id, quantity: 0 }))
   );
@@ -50,7 +48,10 @@ function App() {
     setOrders((prevOrders) =>
       prevOrders.map((order) => {
         if (order.id === id) {
-          if (FOODS.find((food) => food.id === id).stock > 0 && order.quantity < FOODS.find((food) => food.id === id).stock) {
+          if (
+            FOODS.find((food) => food.id === id).stock > 0 &&
+            order.quantity < FOODS.find((food) => food.id === id).stock
+          ) {
             // logic to add order if stock
             return {
               ...order,
@@ -63,21 +64,59 @@ function App() {
     );
   };
 
+  const decrementCuenta = (id) => {
+    setOrders((prevOrders) =>
+      prevOrders.map((order) => {
+        if (order.id === id) {
+          if (
+            FOODS.find((food) => food.id === id).stock > 0 &&
+            order.quantity <= FOODS.find((food) => food.id === id).stock
+          ) {
+            // logic to remove order from the OrderList
+            return {
+              ...order,
+              quantity: order.quantity - 1,
+            };
+          }
+        }
+        return order;
+      })
+    );
+  };
+
+  const deleteCuenta = (id) => {
+    setOrders((prevOrders) =>
+      prevOrders.map((order) => {
+        if (order.id === id) {
+          if (
+            FOODS.find((food) => food.id === id).stock > 0 &&
+            order.quantity <= FOODS.find((food) => food.id === id).stock
+          ) {
+            // logic to remove order from the OrderList
+            return {
+              ...order,
+              quantity: order.quantity - order.quantity,
+            };
+          }
+        }
+        return order;
+      })
+    );
+  };
+
   return (
     <>
       <TitleHeader />
       <FoodTable foods={FOODS} incrementCuenta={incrementCuenta} />
-      <OrderDetails foods={FOODS} orders={orders} incrementCuenta={incrementCuenta}/>
+      <OrderDetails
+        foods={FOODS}
+        orders={orders}
+        incrementCuenta={incrementCuenta}
+        decrementCuenta={decrementCuenta}
+        deleteCuenta={deleteCuenta}
+      />
     </>
   );
 }
-
-// function incrementCuenta() {
-//   setOrders((prevOrders) =>
-//     prevOrders.map((order) =>
-//       order.id === id ? { ...order, quantity: order.quantity + 1 } : order
-//     )
-//   );
-// }
 
 export default App;

@@ -116,6 +116,7 @@ export function OrderListItem({
           width: "30px",
           height: "30px",
           backgroundColor: "#f9f9f9",
+          cursor: "pointer",
         }}
       >
         ➖
@@ -127,6 +128,7 @@ export function OrderListItem({
           width: "30px",
           height: "30px",
           backgroundColor: "#f9f9f9",
+          cursor: "pointer",
         }}
       >
         ➕
@@ -139,6 +141,7 @@ export function OrderListItem({
           width: "30px",
           height: "30px",
           backgroundColor: "#f9f9f9",
+          cursor: "pointer",
         }}
       >
         ❌

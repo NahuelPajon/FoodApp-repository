@@ -5,31 +5,31 @@ export function FoodTable({ foods, incrementCuenta }) {
     return <p>No hay alimentos disponibles.</p>;
   }
 
-  const columnsPerRow = 2; // Number of columns per row
+  const columnsPerRow = 3; // Number of columns per row
   const filas = [];
 
   for (let i = 0; i < foods.length; i += columnsPerRow) {
     const fila = (
       <div key={i}>
         {foods.slice(i, i + columnsPerRow).map((food) => (
-          <FoodCell key={food.id} food={food} incrementCuenta={incrementCuenta} />
+          <FoodCell
+            key={food.id}
+            food={food}
+            incrementCuenta={incrementCuenta}
+          />
         ))}
       </div>
     );
     filas.push(fila);
   }
 
-  return (
-    <div style={{float: "left"}}>
-      {filas}
-    </div>
-  );
+  return <div style={{ float: "left" }}>{filas}</div>;
 }
 
 export function FoodCell({ food, incrementCuenta }) {
   const { name, price, stock, id } = food;
   return (
-    <div
+    <button
       onClick={() => incrementCuenta(id)}
       style={{
         backgroundColor: "#f9f9f9",
@@ -38,11 +38,23 @@ export function FoodCell({ food, incrementCuenta }) {
         padding: "14px",
         borderRadius: "8px",
         margin: "6px",
-        width: "250px",
+        width: "300px",
+        height: "350px",
         textAlign: "center",
         verticalAlign: "top",
+        cursor: "pointer",
+        opacity: stock === 0 ? 0.5 : 1,
+        pointerEvents: stock === 0 ? "none" : "auto",
+        transition: "box-shadow 0.2s ease-in-out",
       }}
-      >
+      // Adding hover effect for box shadow
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "none";
+      }}
+    >
       <FoodImage food={food} />
       <p
         style={{
@@ -50,7 +62,7 @@ export function FoodCell({ food, incrementCuenta }) {
           justifyContent: "center",
           alignItems: "center",
         }}
-        >
+      >
         {name}
       </p>
       <div
@@ -59,27 +71,26 @@ export function FoodCell({ food, incrementCuenta }) {
           justifyContent: "space-between",
           alignItems: "center",
         }}
-        >
+      >
         <p>Price: ${price}</p>
         <p
           style={{
             color: stock === 0 ? "red" : "green",
           }}
-          >
+        >
           Stock: {stock}
         </p>
       </div>
-    </div>
+    </button>
   );
 }
-          
 
 export function FoodImage({ food }) {
   return (
     <img
       src={food.image}
       alt="food Image"
-      style={{ width: "200px", height: "200px", opacity: food.stock === 0 ? 0.5: 1 }}
+      style={{ width: "200px", height: "200px" }}
     />
   );
 }

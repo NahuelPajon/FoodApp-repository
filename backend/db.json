@@ -1,0 +1,60 @@
+{
+  "FOODS": [
+    {
+      "id": 1,
+      "name": "Hamburger",
+      "price": 5.99,
+      "image": "src/images/hamburger.png",
+      "stock": 10
+    },
+    {
+      "id": 2,
+      "name": "Pizza",
+      "price": 8.99,
+      "image": "src/images/pizza.png",
+      "stock": 5
+    },
+    {
+      "id": 3,
+      "name": "Sushi",
+      "price": 12.99,
+      "image": "src/images/sushi.png",
+      "stock": 0
+    },
+    {
+      "id": 4,
+      "name": "Empanadas",
+      "price": 4.99,
+      "image": "src/images/empanada.png",
+      "stock": 30
+    },
+    {
+      "id": 5,
+      "name": "Milanesa con Papas",
+      "price": 7.99,
+      "image": "src/images/milanesa.png",
+      "stock": 7
+    },
+    {
+      "id": 6,
+      "name": "Coca-Cola",
+      "price": 1.99,
+      "image": "src/images/cocacola.png",
+      "stock": 11
+    },
+    {
+      "id": 7,
+      "name": "Chivito",
+      "price": 12.99,
+      "image": "src/images/chivito.png",
+      "stock": 3
+    },
+    {
+      "id": 8,
+      "name": "Tequeños",
+      "price": 1.59,
+      "image": "src/images/tequeno.png",
+      "stock": 21
+    }
+  ]
+}

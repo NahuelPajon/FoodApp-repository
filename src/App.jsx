@@ -4,23 +4,31 @@ import { TitleHeader } from "./components/TitleHeader";
 import { OrderDetails } from "./components/OrderDetails/OrderDetails";
 
 function App() {
-  const [foods, setFoods] = useState([]);
-  const [orders, setOrders] = useState([]);
+  const [foods, setFoods] = useState([]); // stored fetched foods
+  const [orders, setOrders] = useState([]); // stored orders
+  const [loading, setLoading] = useState(true); // loading state
+  const [error, setError] = useState(null); // error handling state
 
   // Fetch de los FOODS desde el backend db.json
   useEffect(() => {
-    async function getFoods() {
+    const fetchFoods = async () => {
       try {
-        const response = await fetch("http://localhost:3000/FOODS");
+        const url = "http://localhost:3000/FOODS";
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
         const data = await response.json();
         setFoods(data); // actualiza el estado de foods
         setOrders(data.map(({ id }) => ({ id, quantity: 0 }))); // inicializa los orders
-      } catch (error) {
-        console.error("Error fetching FOODS:", error);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
-    }
+    };
 
-    getFoods();
+    fetchFoods();
   }, []);
 
   const incrementCuenta = (id) => {

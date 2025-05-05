@@ -1,37 +1,36 @@
 import React from "react";
 
-export function FoodTable({ foods }) {
+export function FoodTable({ foods, incrementCuenta }) {
   if (!foods || foods.length === 0) {
     return <p>No hay alimentos disponibles.</p>;
   }
 
-  const columnsPerRow = 2; // Number of columns per row
+  const columnsPerRow = 3; // Number of columns per row
   const filas = [];
 
   for (let i = 0; i < foods.length; i += columnsPerRow) {
     const fila = (
-      <tr key={i}>
+      <div key={i}>
         {foods.slice(i, i + columnsPerRow).map((food) => (
-          <FoodCell key={food.id} food={food} />
+          <FoodCell
+            key={food.id}
+            food={food}
+            incrementCuenta={incrementCuenta}
+          />
         ))}
-      </tr>
+      </div>
     );
     filas.push(fila);
   }
 
-  return (
-    <table style={{float: "left"}}>
-      <tbody>{filas}</tbody>
-    </table>
-  );
+  return <div style={{ float: "left" }}>{filas}</div>;
 }
 
-export function FoodCell({ food }) {
-  const {name} = food;
-  const {price} = food;
-  const {stock} = food;
+export function FoodCell({ food, incrementCuenta }) {
+  const { name, price, stock, id } = food;
   return (
-    <td
+    <button
+      onClick={() => incrementCuenta(id)}
       style={{
         backgroundColor: "#f9f9f9",
         display: "inline-block",
@@ -39,9 +38,21 @@ export function FoodCell({ food }) {
         padding: "14px",
         borderRadius: "8px",
         margin: "6px",
-        width: "250px",
+        width: "300px",
+        height: "350px",
         textAlign: "center",
         verticalAlign: "top",
+        cursor: "pointer",
+        opacity: stock === 0 ? 0.5 : 1,
+        pointerEvents: stock === 0 ? "none" : "auto",
+        transition: "box-shadow 0.2s ease-in-out",
+      }}
+      // Adding hover effect for box shadow
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "none";
       }}
     >
       <FoodImage food={food} />
@@ -70,7 +81,7 @@ export function FoodCell({ food }) {
           Stock: {stock}
         </p>
       </div>
-    </td>
+    </button>
   );
 }
 
@@ -79,7 +90,7 @@ export function FoodImage({ food }) {
     <img
       src={food.image}
       alt="food Image"
-      style={{ width: "200px", height: "200px", opacity: food.stock === 0 ? 0.5: 1 }}
+      style={{ width: "200px", height: "200px" }}
     />
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FoodImage, FoodTable } from "./components/FoodTable/FoodTable";
 import { TitleHeader } from "./components/TitleHeader";
 import { OrderDetails } from "./components/OrderDetails/OrderDetails";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   const [foods, setFoods] = useState([]); // stored fetched foods
@@ -67,7 +68,7 @@ function App() {
   };
 
   return (
-    <>
+    <ThemeProvider>
       <TitleHeader />
       <FoodTable foods={foods} incrementCuenta={incrementCuenta} />
       <OrderDetails
@@ -77,7 +78,7 @@ function App() {
         decrementCuenta={decrementCuenta}
         deleteCuenta={deleteCuenta}
       />
-    </>
+    </ThemeProvider>
   );
 }
 

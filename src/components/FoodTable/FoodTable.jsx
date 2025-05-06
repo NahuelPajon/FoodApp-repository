@@ -1,12 +1,14 @@
 import React from "react";
+import styles from "./FoodTable.module.css"; // Importing CSS module for styles
+import { useTheme } from "../../context/ThemeContext.jsx";
 
 export function FoodTable({ foods, incrementCuenta }) {
+  const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
+  const columnsPerRow = 3; // Number of columns per row
+  const filas = [];
   if (!foods || foods.length === 0) {
     return <p>No hay alimentos disponibles.</p>;
   }
-
-  const columnsPerRow = 3; // Number of columns per row
-  const filas = [];
 
   for (let i = 0; i < foods.length; i += columnsPerRow) {
     const fila = (
@@ -23,16 +25,24 @@ export function FoodTable({ foods, incrementCuenta }) {
     filas.push(fila);
   }
 
-  return <div style={{ float: "left" }}>{filas}</div>;
+  return (
+    <div
+      className={`${darkMode ? styles.dark : styles.light}`}
+      style={{ float: "left" }}
+    >
+      {filas}
+    </div>
+  );
 }
 
 export function FoodCell({ food, incrementCuenta }) {
+  const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
   const { name, price, stock, id } = food;
   return (
     <button
+      className={`${darkMode ? styles.dark : styles.light}`}
       onClick={() => incrementCuenta(id)}
       style={{
-        backgroundColor: "#f9f9f9",
         display: "inline-block",
         border: "1px solid #ccc",
         padding: "14px",
@@ -57,6 +67,7 @@ export function FoodCell({ food, incrementCuenta }) {
     >
       <FoodImage food={food} />
       <p
+      className={`${darkMode ? styles.dark : styles.light}`}
         style={{
           display: "flex",
           justifyContent: "center",
@@ -66,6 +77,7 @@ export function FoodCell({ food, incrementCuenta }) {
         {name}
       </p>
       <div
+      className={`${darkMode ? styles.dark : styles.light}`}
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -74,6 +86,7 @@ export function FoodCell({ food, incrementCuenta }) {
       >
         <p>Price: ${price}</p>
         <p
+        className={`${darkMode ? styles.dark : styles.light}`}
           style={{
             color: stock === 0 ? "red" : "green",
           }}
@@ -86,8 +99,10 @@ export function FoodCell({ food, incrementCuenta }) {
 }
 
 export function FoodImage({ food }) {
+  const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
   return (
     <img
+      className={`${darkMode ? styles.dark : styles.light}`}
       src={food.image}
       alt="food Image"
       style={{ width: "200px", height: "200px" }}

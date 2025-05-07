@@ -67,7 +67,7 @@ export function FoodCell({ food, incrementCuenta }) {
     >
       <FoodImage food={food} />
       <p
-      className={`${darkMode ? styles.dark : styles.light}`}
+        className={`${darkMode ? styles.dark : styles.light}`}
         style={{
           display: "flex",
           justifyContent: "center",
@@ -77,7 +77,7 @@ export function FoodCell({ food, incrementCuenta }) {
         {name}
       </p>
       <div
-      className={`${darkMode ? styles.dark : styles.light}`}
+        className={`${darkMode ? styles.dark : styles.light}`}
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -86,7 +86,7 @@ export function FoodCell({ food, incrementCuenta }) {
       >
         <p>Price: ${price}</p>
         <p
-        className={`${darkMode ? styles.dark : styles.light}`}
+          className={`${darkMode ? styles.dark : styles.light}`}
           style={{
             color: stock === 0 ? "red" : "green",
           }}

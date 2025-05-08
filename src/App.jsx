@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import { FoodImage, FoodTable } from "./components/FoodTable/FoodTable";
 import { TitleHeader } from "./components/TitleHeader";
 import { OrderDetails } from "./components/OrderDetails/OrderDetails";
-import { ThemeProvider } from "./context/ThemeContext";
+import { useTheme } from "./context/ThemeContext";
+// import { useTheme } from "./context/ThemeContext";
+import styles from "./App.module.css";
 
 function App() {
+  const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
+
   const [foods, setFoods] = useState([]); // stored fetched foods
   const [orders, setOrders] = useState([]); // stored orders
   const [loading, setLoading] = useState(true); // loading state
@@ -31,6 +35,11 @@ function App() {
 
     fetchFoods();
   }, []);
+
+  useEffect(() => {
+    document.body.style.backgroundColor = darkMode ? "#222" : "#f9f9f9";
+    document.body.style.color = darkMode ? "#fff" : "black";
+  }, [darkMode]);
 
   const incrementCuenta = (id) => {
     setOrders((prevOrders) =>
@@ -66,9 +75,9 @@ function App() {
       })
     );
   };
-  
+
   return (
-    <ThemeProvider>
+    <div>
       <TitleHeader />
       <FoodTable foods={foods} incrementCuenta={incrementCuenta} />
       <OrderDetails
@@ -78,7 +87,7 @@ function App() {
         decrementCuenta={decrementCuenta}
         deleteCuenta={deleteCuenta}
       />
-    </ThemeProvider>
+    </div>
   );
 }
 

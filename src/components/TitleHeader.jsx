@@ -9,12 +9,34 @@ export function TitleHeader() {
     <div
       className={darkMode ? styles.dark : styles.light}
       style={{
+        display: "flex",
         paddingLeft: "15px",
         borderBottom: "1px solid #ccc",
       }}
     >
-      <h1>Food App</h1>
-      <button className={darkMode ? "dark-mode" : "light-mode"} onClick={toggleTheme}>{darkMode ? "☀️" : "🌙"}</button>
+      <h1
+        style={{
+          width: "auto",
+          height: "auto",
+          fontSize: "40px",
+        }}
+      >
+        Food App
+      </h1>
+      <button
+        className={darkMode ? "dark-mode" : "light-mode"}
+        style={{
+          background: "none",
+          border: "none",
+          fontSize: "35px",
+          cursor: "pointer",
+          marginLeft: "auto",
+          marginRight: "25px",
+        }}
+        onClick={toggleTheme}
+      >
+        {darkMode ? "☀️" : "🌙"}
+      </button>
     </div>
   );
 }

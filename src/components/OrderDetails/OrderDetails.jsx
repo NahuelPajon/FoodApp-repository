@@ -58,7 +58,9 @@ export function OrderDetails({
           padding: "15px",
         }}
       >
-        <h1 className={`${darkMode ? styles.dark : styles.light}`}>Total</h1>
+        <h1 className={`${darkMode ? styles.dark : styles.light}`}>
+          Total
+        </h1>
         <h1 className={`${darkMode ? styles.dark : styles.light}`}>
           $ {totalPrices}
         </h1>
@@ -127,9 +129,9 @@ export function OrderListItem({
       key={id}
       style={style}
     >
-      <img src={image} alt={name} style={{ width: "50px" }} />
+      <img src={image} alt={name} style={{ width: "55px" }} />
       {/* <p>{name}</p> */}
-      <p>X {quantityOrdered}</p>
+      <p>x {quantityOrdered}</p>
       <button
         className={`${darkMode ? styles.dark : styles.light}`}
         onClick={() => decrementCuenta(id)}

@@ -79,7 +79,7 @@ function App() {
   return (
     <div>
       <TitleHeader />
-      <FoodTable foods={foods} incrementCuenta={incrementCuenta} />
+      <FoodTable foods={foods} incrementCuenta={incrementCuenta} decrementCuenta= {decrementCuenta} orders={orders} />
       <OrderDetails
         foods={foods}
         orders={orders}

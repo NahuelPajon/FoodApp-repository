@@ -32,8 +32,15 @@ export function TitleHeader() {
           cursor: "pointer",
           marginLeft: "auto",
           marginRight: "25px",
+          transition: "transform 1.0s ease"
         }}
         onClick={toggleTheme}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "rotate(315deg)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "rotate(360deg)";
+        }}
       >
         {darkMode ? "☀️" : "🌙"}
       </button>

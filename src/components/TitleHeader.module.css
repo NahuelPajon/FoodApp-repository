@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+
+.light {
+  background-color: #f9f9f9;
+}
+
+.dark {
+  background-color: #222;
+  color: #fff;
+}
+
+h1 {
+  font-family: "Pacifico", cursive;
+}
+
+p {
+  font-family: "Lobster", cursive;
+  font-size: 20px;
+}

@@ -1,3 +1,7 @@
+import React from "react";
+import styles from "./OrderDetails.module.css"; // Importing CSS module for styles
+import { useTheme } from "../../context/ThemeContext.jsx";
+
 export function OrderDetails({
   foods,
   orders,
@@ -5,6 +9,7 @@ export function OrderDetails({
   decrementCuenta,
   deleteCuenta,
 }) {
+  const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
   let totalPrices = orders.reduce((acc, order) => {
     const food = foods.find((food) => food.id === order.id);
     if (!food || order.quantity <= 0) return acc;
@@ -15,9 +20,10 @@ export function OrderDetails({
 
   return (
     <aside
+      className={`${darkMode ? styles.dark : styles.light}`}
       style={{
         float: "right",
-        backgroundColor: "#f9f9f9",
+        // backgroundColor: "#f9f9f9",
         border: "1px solid #ccc",
         padding: "14px",
         borderRadius: "8px",
@@ -26,11 +32,15 @@ export function OrderDetails({
         textAlign: "center",
       }}
     >
-      <h1 style={{ borderBottom: "1px solid #ccc", paddingBottom: "5%" }}>
+      <h1
+        className={`${darkMode ? styles.dark : styles.light}`}
+        style={{ borderBottom: "1px solid #ccc", paddingBottom: "5%" }}
+      >
         Cuenta
       </h1>
 
       <OrderList
+        className={`${darkMode ? styles.dark : styles.light}`}
         foods={foods}
         orders={orders}
         incrementCuenta={incrementCuenta}
@@ -39,6 +49,7 @@ export function OrderDetails({
       />
 
       <div
+        className={`${darkMode ? styles.dark : styles.light}`}
         style={{
           marginTop: "10%",
           display: "flex",
@@ -47,8 +58,12 @@ export function OrderDetails({
           padding: "15px",
         }}
       >
-        <h1>Total</h1>
-        <h1>$ {totalPrices}</h1>
+        <h1 className={`${darkMode ? styles.dark : styles.light}`}>
+          Total
+        </h1>
+        <h1 className={`${darkMode ? styles.dark : styles.light}`}>
+          $ {totalPrices}
+        </h1>
       </div>
     </aside>
   );
@@ -61,8 +76,10 @@ export function OrderList({
   decrementCuenta,
   deleteCuenta,
 }) {
+  const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
+
   return (
-    <div>
+    <div className={`${darkMode ? styles.dark : styles.light}`}>
       {orders.map((order) => {
         const food = foods.find((food) => food.id === order.id);
 
@@ -99,35 +116,43 @@ export function OrderListItem({
   deleteCuenta,
   style,
 }) {
+  const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
+
   const { name, price, stock, id, image } = food;
 
   const quantityOrdered = order.quantity; // Get the quantity ordered from the order object
   const priceOrdered = (price * quantityOrdered).toFixed(2); // Calculate the total price for the ordered quantity
 
   return (
-    <div key={id} style={style}>
-      <img src={image} alt={name} style={{ width: "50px" }} />
+    <div
+      className={`${darkMode ? styles.dark : styles.light}`}
+      key={id}
+      style={style}
+    >
+      <img src={image} alt={name} style={{ width: "55px" }} />
       {/* <p>{name}</p> */}
-      <p>X {quantityOrdered}</p>
+      <p>x {quantityOrdered}</p>
       <button
+        className={`${darkMode ? styles.dark : styles.light}`}
         onClick={() => decrementCuenta(id)}
         style={{
           border: "none",
           width: "30px",
           height: "30px",
-          backgroundColor: "#f9f9f9",
+          // backgroundColor: "#f9f9f9",
           cursor: "pointer",
         }}
       >
         ➖
       </button>
       <button
+        className={`${darkMode ? styles.dark : styles.light}`}
         onClick={() => incrementCuenta(id)}
         style={{
           border: "none",
           width: "30px",
           height: "30px",
-          backgroundColor: "#f9f9f9",
+          // backgroundColor: "#f9f9f9",
           cursor: "pointer",
         }}
       >
@@ -135,12 +160,13 @@ export function OrderListItem({
       </button>
       <p>Price: ${priceOrdered}</p>
       <button
+        className={`${darkMode ? styles.dark : styles.light}`}
         onClick={() => deleteCuenta(id)}
         style={{
           border: "none",
           width: "30px",
           height: "30px",
-          backgroundColor: "#f9f9f9",
+          // backgroundColor: "#f9f9f9",
           cursor: "pointer",
         }}
       >

@@ -1,12 +1,14 @@
 import React from "react";
+import styles from "./FoodTable.module.css"; // Importing CSS module for styles
+import { useTheme } from "../../context/ThemeContext.jsx";
 
-export function FoodTable({ foods, incrementCuenta }) {
+export function FoodTable({ foods, incrementCuenta, decrementCuenta, orders }) {
+  const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
+  const columnsPerRow = 3; // Number of columns per row
+  const filas = [];
   if (!foods || foods.length === 0) {
     return <p>No hay alimentos disponibles.</p>;
   }
-
-  const columnsPerRow = 3; // Number of columns per row
-  const filas = [];
 
   for (let i = 0; i < foods.length; i += columnsPerRow) {
     const fila = (
@@ -16,6 +18,8 @@ export function FoodTable({ foods, incrementCuenta }) {
             key={food.id}
             food={food}
             incrementCuenta={incrementCuenta}
+            decrementCuenta={decrementCuenta}
+            orders={orders}
           />
         ))}
       </div>
@@ -23,16 +27,34 @@ export function FoodTable({ foods, incrementCuenta }) {
     filas.push(fila);
   }
 
-  return <div style={{ float: "left" }}>{filas}</div>;
+  return (
+    <div
+      className={`${darkMode ? styles.dark : styles.light}`}
+      style={{ float: "left" }}
+    >
+      {filas}
+    </div>
+  );
 }
 
-export function FoodCell({ food, incrementCuenta }) {
+export function FoodCell({ food, incrementCuenta, decrementCuenta, orders }) {
+  const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
+  
+  const order = orders.find((order) => food.id === order.id);
+  const quantityOrdered = order.quantity;
+
   const { name, price, stock, id } = food;
+  let stockCelda = stock - quantityOrdered;
+
   return (
     <button
+      className={`${darkMode ? styles.dark : styles.light}`}
       onClick={() => incrementCuenta(id)}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        decrementCuenta(id)
+      }}
       style={{
-        backgroundColor: "#f9f9f9",
         display: "inline-block",
         border: "1px solid #ccc",
         padding: "14px",
@@ -43,13 +65,13 @@ export function FoodCell({ food, incrementCuenta }) {
         textAlign: "center",
         verticalAlign: "top",
         cursor: "pointer",
-        opacity: stock === 0 ? 0.5 : 1,
-        pointerEvents: stock === 0 ? "none" : "auto",
+        opacity: stockCelda === 0 ? 0.5 : 1,
+        pointerEvents: stockCelda === 0 ? "none" : "auto",
         transition: "box-shadow 0.2s ease-in-out",
       }}
       // Adding hover effect for box shadow
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+        e.currentTarget.style.boxShadow = darkMode ? "0 4px 8px rgba(255, 255, 255, 0.4)" : "0 4px 8px rgba(0, 0, 0, 0.2)";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.boxShadow = "none";
@@ -57,6 +79,7 @@ export function FoodCell({ food, incrementCuenta }) {
     >
       <FoodImage food={food} />
       <p
+        className={`${darkMode ? styles.dark : styles.light}`}
         style={{
           display: "flex",
           justifyContent: "center",
@@ -66,19 +89,21 @@ export function FoodCell({ food, incrementCuenta }) {
         {name}
       </p>
       <div
+        className={`${darkMode ? styles.dark : styles.light}`}
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <p>Price: ${price}</p>
+        <p>Precio: ${price}</p>
         <p
+          className={`${darkMode ? styles.dark : styles.light}`}
           style={{
-            color: stock === 0 ? "red" : "green",
+            color: stockCelda === 0 ? "red" : "green",
           }}
         >
-          Stock: {stock}
+          Stock: {stockCelda}
         </p>
       </div>
     </button>
@@ -86,11 +111,19 @@ export function FoodCell({ food, incrementCuenta }) {
 }
 
 export function FoodImage({ food }) {
+  const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
   return (
     <img
+      className={`${darkMode ? styles.dark : styles.light}`}
       src={food.image}
       alt="food Image"
       style={{ width: "200px", height: "200px" }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "scale(1.04)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "scale(1.0)";
+      }}
     />
   );
 }

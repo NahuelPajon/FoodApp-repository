@@ -3,8 +3,9 @@ import { FoodImage, FoodTable } from "./components/FoodTable/FoodTable";
 import { TitleHeader } from "./components/TitleHeader";
 import { OrderDetails } from "./components/OrderDetails/OrderDetails";
 import { useTheme } from "./context/ThemeContext";
+import { Routes } from "react-router-dom";
 // import { useTheme } from "./context/ThemeContext";
-import styles from "./App.module.css";
+// import styles from "./App.module.css";
 
 function App() {
   const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)

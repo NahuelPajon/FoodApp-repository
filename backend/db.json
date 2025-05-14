@@ -5,56 +5,80 @@
       "name": "Hamburger",
       "price": 5.99,
       "image": "src/images/hamburger.png",
-      "stock": 10
+      "stock": 10,
+      "details": "Nacida en los Estados Unidos, la hamburguesa es un ícono de la comida rápida. Nuestra versión se elabora con carne 100% vacuna y pan artesanal.",
+      "ingredients": "Pan artesanal, Carne vacuna, Lechuga, Tomate, Queso cheddar",
+      "condiments": "Ketchup, Mostaza, Mayonesa"
     },
     {
       "id": 2,
       "name": "Pizza",
       "price": 8.99,
       "image": "src/images/pizza.png",
-      "stock": 5
+      "stock": 5,
+      "details": "La pizza, originaria de Nápoles, es amada en todo el mundo. La nuestra se hornea en piedra y lleva mozzarella fresca y salsa casera.",
+      "ingredients": "Masa de pizza, Salsa de tomate, Mozzarella, Aceitunas, Orégano",
+      "condiments": "Ají molido, Aceite de oliva"
     },
     {
       "id": 3,
       "name": "Sushi",
       "price": 12.99,
       "image": "src/images/sushi.png",
-      "stock": 0
+      "stock": 0,
+      "details": "El sushi representa la delicadeza de la cocina japonesa. Preparado con arroz avinagrado y pescado fresco, es una experiencia única.",
+      "ingredients": "Arroz de sushi, Alga nori, Salmón, Palta, Pepino",
+      "condiments": "Salsa de soja, Wasabi, Jengibre encurtido"
     },
     {
       "id": 4,
       "name": "Empanadas",
       "price": 4.99,
       "image": "src/images/empanada.png",
-      "stock": 30
+      "stock": 30,
+      "details": "Las empanadas son un clásico del Río de la Plata. Las nuestras están rellenas con carne picante, cocidas al horno de barro.",
+      "ingredients": "Masa de empanada, Carne picada, Cebolla, Huevo duro, Aceitunas",
+      "condiments": "Comino, Ají molido, Pimienta negra"
     },
     {
       "id": 5,
       "name": "Milanesa con Papas",
       "price": 7.99,
       "image": "src/images/milanesa.png",
-      "stock": 7
+      "stock": 7,
+      "details": "Inspirada en la cotoletta italiana, la milanesa con papas es un plato infaltable en los hogares uruguayos y argentinos.",
+      "ingredients": "Carne de res, Pan rallado, Huevo, Papas, Perejil",
+      "condiments": "Sal, Pimienta, Limón"
     },
     {
       "id": 6,
       "name": "Coca-Cola",
       "price": 1.99,
       "image": "src/images/cocacola.png",
-      "stock": 11
+      "stock": 11,
+      "details": "Desde 1886, Coca-Cola ha acompañado millones de comidas. Servida bien fría, es la bebida perfecta para cualquier plato.",
+      "ingredients": "Agua carbonatada, Jarabe de maíz, Cafeína, Aromas naturales, Colorante caramelo",
+      "condiments": ""
     },
     {
       "id": 7,
       "name": "Chivito",
       "price": 12.99,
       "image": "src/images/chivito.png",
-      "stock": 3
+      "stock": 3,
+      "details": "El chivito uruguayo es más que un sándwich: es una institución. Lleva carne, jamón, queso, huevo y todo lo que puedas imaginar.",
+      "ingredients": "Pan de hamburguesa, Lomo de res, Jamón, Queso mozzarella, Huevo frito, Lechuga, Tomate",
+      "condiments": "Mayonesa, Ketchup, Mostaza"
     },
     {
       "id": 8,
       "name": "Tequeños",
       "price": 1.59,
       "image": "src/images/tequeno.png",
-      "stock": 22
+      "stock": 22,
+      "details": "Delicias de Venezuela, los tequeños son palitos de queso envueltos en masa y fritos. Crujientes por fuera, cremosos por dentro.",
+      "ingredients": "Queso blanco duro, Harina de trigo, Huevos, Mantequilla",
+      "condiments": "Salsas dulces, Guasacaca, Salsa tártara"
     }
   ]
 }

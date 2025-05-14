@@ -23,6 +23,7 @@ function App() {
         {/* </Route> */}
         <Route path="/foods/*" element={<HomePage />}/>
         <Route path="/foods/details" element={<FoodDetails />} />
+        <Route path="/foods/details/:id" element={<FoodDetails />} />
         {/* <Route path="foods/details/:productId" element={<FoodDetails />} /> */}
       </Routes>
     </>

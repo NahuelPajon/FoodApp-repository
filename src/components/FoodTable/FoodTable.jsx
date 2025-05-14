@@ -98,7 +98,7 @@ export function FoodCell({ food, incrementCuenta, decrementCuenta, orders }) {
         }}
       >
         <p>Precio: ${price}</p>
-        <Link to={{}}>Detalles</Link>
+        <Link to={`/foods/details/${food.id}`}>Detalles</Link>
         <p
           className={`${darkMode ? styles.dark : styles.light}`}
           style={{

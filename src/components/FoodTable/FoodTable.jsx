@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./FoodTable.module.css"; // Importing CSS module for styles
 import { useTheme } from "../../context/ThemeContext.jsx";
+import { Link } from "react-router-dom";
 
 export function FoodTable({ foods, incrementCuenta, decrementCuenta, orders }) {
   const { darkMode } = useTheme(); //Traigo el contexto del tema (si es oscuro o claro)
@@ -97,6 +98,7 @@ export function FoodCell({ food, incrementCuenta, decrementCuenta, orders }) {
         }}
       >
         <p>Precio: ${price}</p>
+        <Link to={`/foods/details/${food.id}`}>Detalles</Link>
         <p
           className={`${darkMode ? styles.dark : styles.light}`}
           style={{
